@@ -1,6 +1,6 @@
 # Complete Guide to Building, Deploying, and Optimizing Generative AI with Langchain and Huggingface
 
-Welcome to the **Complete Guide to Building, Deploying, and Optimizing Generative AI** using **Langchain** and **Huggingface**! This repository will guide you through the step-by-step process of building a powerful Generative AI application using these cutting-edge frameworks.
+Welcome to the **Complete Guide to Building, Deploying, and Optimizing Generative AI** using **Langchain**, **Huggingface**, and **Streamlit**! This repository will guide you through building and deploying a Generative AI application using these frameworks.
 
 ## Table of Contents
 
@@ -10,7 +10,7 @@ Welcome to the **Complete Guide to Building, Deploying, and Optimizing Generativ
 - [Setup and Installation](#setup-and-installation)
 - [Building a Generative AI with Langchain](#building-a-generative-ai-with-langchain)
 - [Integrating Huggingface Transformers](#integrating-huggingface-transformers)
-- [Deploying the AI Model](#deploying-the-ai-model)
+- [Deploying with Streamlit](#deploying-with-streamlit)
 - [Optimizing Model Performance](#optimizing-model-performance)
 - [Running the Application](#running-the-application)
 - [Contributing](#contributing)
@@ -18,66 +18,63 @@ Welcome to the **Complete Guide to Building, Deploying, and Optimizing Generativ
 
 ## Introduction
 
-Generative AI models are revolutionizing industries with their ability to generate human-like text, images, and other media. This guide focuses on:
-- **Langchain**: A framework for developing applications powered by language models.
-- **Huggingface**: A leading library providing access to state-of-the-art pre-trained models, including transformers like GPT and BERT.
-
-The goal is to help you develop, deploy, and optimize a generative AI model that can be used in real-world applications.
+Generative AI is transforming industries with its ability to generate text, images, and other forms of media. In this guide, we'll use:
+- **Langchain**: For managing prompts and creating application chains.
+- **Huggingface**: For integrating state-of-the-art models like GPT, BERT, and others.
+- **Streamlit**: For building interactive user interfaces and deploying AI applications easily.
 
 ## Project Overview
 
-In this project, we will:
-1. Build a generative AI model using **Langchain** to manage prompts and chains.
-2. Integrate pre-trained models from **Huggingface's Transformers** library.
-3. Deploy the model as a web service using **Flask** or **FastAPI**.
-4. Optimize the model for performance using techniques like prompt tuning and GPU acceleration.
+We'll build, deploy, and optimize a Generative AI application:
+1. Using **Langchain** for prompt management.
+2. Leveraging **Huggingface Transformers** for text generation.
+3. Deploying the model using **Streamlit**.
+4. Optimizing the model for performance and scalability.
 
 ## Prerequisites
 
-To follow this guide, you should have the following installed:
-- Python 3.8+
+Ensure you have the following installed:
+- Python 3.9+
 - [Langchain](https://github.com/hwchase17/langchain)
 - [Huggingface Transformers](https://huggingface.co/transformers/)
+- [Streamlit](https://streamlit.io/)
 - Git
-- Docker (for deployment)
-- Flask or FastAPI (for API deployment)
+- Docker (optional for deployment)
 
 Basic knowledge of:
-- Generative AI models
-- Natural Language Processing (NLP)
-- Web APIs
-- Docker (for containerization)
+- NLP and Generative AI models
+- Web deployment and APIs
+- Streamlit for creating web apps
 
 ## Setup and Installation
 
 1. **Clone the repository**:
     ```bash
-    git clone https://github.com/your-username/generative-ai-langchain-huggingface.git
-    cd generative-ai-langchain-huggingface
+    git clone https://github.com/SuchindraKumar/Complete_Generative_AI_With_Langchain_and_Huggingface.git
+    cd Complete_Generative_AI_With_Langchain_and_Huggingface
     ```
 
-2. **Create a Python virtual environment**:
+2. **Create a virtual environment**:
     ```bash
-    python3 -m venv venv
-    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+    conda create -p venv python==3.9 -y
+    source activate ./venv`
     ```
 
-3. **Install the required libraries**:
+3. **Install required libraries**:
     ```bash
     pip install -r requirements.txt
     ```
 
-4. **Install additional tools** for deployment and optimization (if necessary):
+4. **Install Streamlit**:
     ```bash
-    pip install flask fastapi uvicorn gunicorn
+    pip install streamlit
     ```
 
 ## Building a Generative AI with Langchain
 
-Langchain makes it easy to build language-model-powered applications. In this section, you will learn how to use Langchain to:
-- Create chains and handle prompt management.
-- Connect multiple models and tools.
-- Manage memory and handle long text inputs.
+Langchain makes it easy to build powerful applications that use language models. You'll use Langchain to:
+- Define templates for generating text.
+- Build chains that manage prompts and outputs.
 
 ### Example Code
 ```python
@@ -87,9 +84,7 @@ from transformers import pipeline
 template = """Translate this English text to French: {text}"""
 prompt = PromptTemplate(template=template, input_variables=["text"])
 
-# Using Huggingface pipeline as a Langchain LLM
 translator = pipeline('translation_en_to_fr')
-
 llm_chain = LLMChain(prompt_template=prompt, llm=translator)
 
 response = llm_chain.run("Hello, how are you?")
